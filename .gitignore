@@ -1,0 +1,5 @@
+/vendor/
+/locales
+.idea
+composer.lock
+

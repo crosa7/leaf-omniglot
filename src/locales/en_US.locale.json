@@ -1,0 +1,7 @@
+{
+    "welcome.page.title": "Hello World",
+    "welcome.page.sub_title": "This is welcome page subtitle",
+    "navbar.rental_shop": "RENTAL SHOP",
+    "navbar.surf_school": "SURF SCHOOL",
+    "navbar.contacts": "CONTACTS %param%"
+}

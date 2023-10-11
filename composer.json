@@ -1,0 +1,28 @@
+{
+    "name": "crosa7/leaf-omniglot",
+    "description": "A Leaf module to add multi language capabilities to leaf applications",
+    "type": "library",
+    "require": {
+        "leafs/http": "^2.3"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.21"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Crosa7\\LeafOmniglot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "André Rosa",
+            "email": "crosa7000@gmail.com"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
