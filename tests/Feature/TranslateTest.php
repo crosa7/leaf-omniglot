@@ -27,21 +27,21 @@ it('tests that translate, translates with single and multiple parameters', funct
     )->toBe('Test good and stuff');
 });
 
-//it('tests that translate, translates for multiple languages', function () {
-//    omniglot()->init([
-//        'TRANSLATION_FILES_LOCATION' => './tests/data/locales'
-//    ]);
-//
-//    expect(
-//        tl('test.with.param1', ['%param%' => 'good'])
-//    )->toBe('Test good EN');
-//
-//    omniglot()->setCurrentLocale('pt_PT');
-//
-//    expect(
-//        tl('test.with.param1', ['%param%' => 'good'])
-//    )->toBe('Test good PT');
-//});
+it('tests that translate, translates for multiple languages', function () {
+    omniglot()->init([
+        'TRANSLATION_FILES_LOCATION' => './tests/data/locales'
+    ]);
+
+    expect(
+        tl('test.with.param1', ['%param%' => 'good'])
+    )->toBe('Test good EN');
+
+    omniglot()->setCurrentLocale('pt_PT');
+
+    expect(
+        tl('test.with.param1', ['%param%' => 'good'])
+    )->toBe('Test good PT');
+});
 
 it('tests that translate, fallback to translation key in case translation not found', function () {
     omniglot()->init([

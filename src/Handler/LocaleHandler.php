@@ -7,25 +7,23 @@ namespace LeafOmniglot\Handler;
 
 
 use LeafOmniglot\Constants\ConfigConstants;
-use LeafOmniglot\Exceptions\MissingTranslationFileException;
 use LeafOmniglot\Plugins\Locale\LocaleStrategyPluginInterface;
 use LeafOmniglot\Reader\ConfigReader;
 
 class LocaleHandler
 {
-    private const TRANSLATION_FILE_SUFFIX = '.locale.json';
-    private const TRANSLATION_FILES_SUFFIX_PATTERN = '/\.locale\.json$/';
-
-    private array $translationFilesByLocale = [];
-
     private LocaleStrategyPluginInterface $localeStrategyPlugin;
+
+    private FileHandler $fileHandler;
 
     /**
      * @param \LeafOmniglot\Plugins\Locale\LocaleStrategyPluginInterface $localeStrategyPlugin
+     * @param \LeafOmniglot\Handler\FileHandler $fileHandler
      */
-    public function __construct(LocaleStrategyPluginInterface $localeStrategyPlugin)
+    public function __construct(LocaleStrategyPluginInterface $localeStrategyPlugin, FileHandler $fileHandler)
     {
         $this->localeStrategyPlugin = $localeStrategyPlugin;
+        $this->fileHandler = $fileHandler;
     }
 
     /**
@@ -37,9 +35,7 @@ class LocaleHandler
      */
     public function setCurrentLocale(string $locale): void
     {
-        $translationFilesByLocale = $this->getTranslationFilesByLocale();
-        $this->verifyTranslationFileExistsForLocale($translationFilesByLocale, $locale);
-
+        $this->fileHandler->loadTranslationsByLocale($locale);
         $this->localeStrategyPlugin->setCurrentLocale($locale);
     }
 
@@ -62,46 +58,10 @@ class LocaleHandler
     }
 
     /**
-     * @return array<string, string>
-     */
-    public function getTranslationFilesByLocale(): array
-    {
-        if (!$this->translationFilesByLocale) {
-            $files = scandir(ConfigReader::config(ConfigConstants::KEY_TRANSLATION_FILES_LOCATION));
-            $filteredFiles = preg_grep(self::TRANSLATION_FILES_SUFFIX_PATTERN, $files);
-
-            $translationFilesByLocale = [];
-            foreach ($filteredFiles as $fileName) {
-                $locale = basename($fileName, self::TRANSLATION_FILE_SUFFIX);
-                $translationFilesByLocale[$locale] = $fileName;
-            }
-
-            $this->translationFilesByLocale = $translationFilesByLocale;
-        }
-
-        return $this->translationFilesByLocale;
-    }
-
-    /**
      * @return array
      */
     public function getAvailableLocales(): array
     {
-        return array_keys($this->getTranslationFilesByLocale());
-    }
-
-    /**
-     * @param array $translationFilesByLocale
-     * @param string $locale
-     *
-     * @return void
-     *
-     * @throws \Exception
-     */
-    private function verifyTranslationFileExistsForLocale(array $translationFilesByLocale, string $locale): void
-    {
-        if (!isset($translationFilesByLocale[$locale])) {
-            throw new MissingTranslationFileException($locale);
-        }
+        return array_keys($this->fileHandler->getTranslationFiles());
     }
 }

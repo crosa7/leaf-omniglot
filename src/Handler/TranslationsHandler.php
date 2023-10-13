@@ -6,23 +6,22 @@ declare(strict_types=1);
 namespace LeafOmniglot\Handler;
 
 
-use LeafOmniglot\Constants\ConfigConstants;
-use LeafOmniglot\Exceptions\MissingTranslationFileException;
 use LeafOmniglot\Exceptions\TranslationParamNotFoundException;
-use LeafOmniglot\Reader\ConfigReader;
 
 class TranslationsHandler
 {
-    private static array $translationsArrayByLocale = [];
-
     private LocaleHandler $localeHandler;
+
+    private FileHandler $fileHandler;
 
     /**
      * @param \LeafOmniglot\Handler\LocaleHandler $localeHandler
+     * @param \LeafOmniglot\Handler\FileHandler $fileHandler
      */
-    public function __construct(LocaleHandler $localeHandler)
+    public function __construct(LocaleHandler $localeHandler, FileHandler $fileHandler)
     {
         $this->localeHandler = $localeHandler;
+        $this->fileHandler = $fileHandler;
     }
 
     /**
@@ -37,20 +36,7 @@ class TranslationsHandler
             $currentLocale = $defaultLocale;
         }
 
-        if (!isset(static::$translationsArrayByLocale[$currentLocale])) {
-            static::$translationsArrayByLocale = [];
-            $translationFilesByLocale = $this->localeHandler->getTranslationFilesByLocale();
-
-            $folderPath = ConfigReader::config(ConfigConstants::KEY_TRANSLATION_FILES_LOCATION);
-
-            if(!isset($translationFilesByLocale[$currentLocale])) {
-                throw new MissingTranslationFileException($currentLocale);
-            }
-
-            $jsonTranslations = file_get_contents($folderPath . '/' . $translationFilesByLocale[$currentLocale]);
-
-            static::$translationsArrayByLocale[$currentLocale] = json_decode($jsonTranslations, true);
-        }
+        $this->fileHandler->loadTranslationsByLocale($currentLocale);
     }
 
     /**
@@ -62,9 +48,10 @@ class TranslationsHandler
     public function getTranslationByKey(string $key, array $params = []): string
     {
         $currentLocale = $this->localeHandler->getCurrentLocale();
+        $translations = $this->fileHandler->getTranslations();
 
-        if (isset(static::$translationsArrayByLocale[$currentLocale][$key]) && $params) {
-            $translationString = static::$translationsArrayByLocale[$currentLocale][$key];
+        if (isset($translations[$currentLocale][$key]) && $params) {
+            $translationString = $translations[$currentLocale][$key];
 
             foreach ($params as $key => $value) {
                 if (!preg_match('/'. $key . '/', $translationString)) {
@@ -76,6 +63,6 @@ class TranslationsHandler
             return $translationString;
         }
 
-        return static::$translationsArrayByLocale[$currentLocale][$key] ?? $key;
+        return $translations[$currentLocale][$key] ?? $key;
     }
 }

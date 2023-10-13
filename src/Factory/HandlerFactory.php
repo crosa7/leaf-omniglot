@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace LeafOmniglot\Factory;
 
+use LeafOmniglot\Handler\FileHandler;
 use LeafOmniglot\Handler\LocaleHandler;
 use LeafOmniglot\Handler\RouteHandler;
 use LeafOmniglot\Handler\TranslationsHandler;
@@ -17,7 +18,7 @@ class HandlerFactory
      */
     public function createTranslationsHandler(): TranslationsHandler
     {
-       return new TranslationsHandler($this->createLocaleHandler());
+       return new TranslationsHandler($this->createLocaleHandler(), $this->createFileHandler());
     }
 
     /**
@@ -25,7 +26,7 @@ class HandlerFactory
      */
     public function createLocaleHandler(): LocaleHandler
     {
-        return new LocaleHandler(ConfigReader::getLocaleStrategy());
+        return new LocaleHandler(ConfigReader::getLocaleStrategy(), $this->createFileHandler());
     }
 
     /**
@@ -34,5 +35,13 @@ class HandlerFactory
     public function createRouteHandler(): RouteHandler
     {
         return new RouteHandler();
+    }
+
+    /**
+     * @return \LeafOmniglot\Handler\FileHandler
+     */
+    public function createFileHandler(): FileHandler
+    {
+        return new FileHandler();
     }
 }
