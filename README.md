@@ -32,6 +32,62 @@ composer require crosa7/leaf-omniglot
 
 [//]: # (```)
 
+## Quick Start Guide
+
+### Create translation folder and files
+
+```php
+// Create a folder named "locales" in your project root
+// (you can also create in another place that makes more sense, just be aware to configure the path accordingly)
+
+// Create the following file inside the "locales" folder
+en_US.locale.json
+
+// With the following content
+{
+    "welcome.title": "Hello World"
+}
+```
+
+### Initialize Omniglot
+
+In your index.php file (if using MVC: public/index.php). Add these lines:
+
+```php
+omniglot()->init(
+    [
+        'TRANSLATION_FILES_LOCATION' => './locales',
+    ]
+);
+```
+
+### Add Language Switch Route
+
+In your routes file ("_app.php" for MVC and "index.php" for base Leaf) add this line:
+
+```php
+omniglot()->addLanguageSwitchRoute();
+```
+
+### Start Translating
+
+Now in your template file you can add the following:
+
+(this example is using blade as template engine but you can adjust according to your template engine)
+```php
+<form method="post" action="/language/switch">
+  <select name="locale" onchange="this.form.submit()">
+    @foreach(omniglot()->getAvailableLocales() as $locale)
+        <option value="{{ $locale }}" {{ omniglot()->getCurrentLocale() === $locale ? 'selected' : '' }}>{{ $locale }}</option>
+    @endforeach
+  </select>
+</form>
+
+<h1>{{ tl('welcome.title') }}</h1>
+```
+
+You should then see inside the "h1" tag in your browser the text: Hello World
+
 ## Basic Usage
 
 After installing omniglot, you need to create a folder where your translation files will live.
