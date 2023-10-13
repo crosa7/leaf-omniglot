@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace App\src\Factory;
 
 use App\src\Handler\LocaleHandler;
+use App\src\Handler\RouteHandler;
 use App\src\Handler\TranslationsHandler;
 use App\src\Reader\ConfigReader;
 
@@ -25,5 +26,13 @@ class HandlerFactory
     public function createLocaleHandler(): LocaleHandler
     {
         return new LocaleHandler(ConfigReader::getLocaleStrategy());
+    }
+
+    /**
+     * @return \App\src\Handler\RouteHandler
+     */
+    public function createRouteHandler(): RouteHandler
+    {
+        return new RouteHandler();
     }
 }

@@ -70,4 +70,24 @@ class Omniglot extends Core
     {
         return $this->getHandlerFactory()->createLocaleHandler()->getDefaultLocale();
     }
+
+    /**
+     * @param string|null $path
+     * @param string|null $requestLocaleParamName
+     * @param bool|null $redirectToReferer
+     *
+     * @return void
+     *
+     * @throws \Exception
+     */
+    public function addLanguageSwitchRoute(
+        string $path = '/language/switch',
+        string $requestLocaleParamName = 'locale',
+        bool $redirectToReferer = true
+    ): void {
+        $this
+            ->getHandlerFactory()
+            ->createRouteHandler()
+            ->addLanguageSwitchRoute($path, $requestLocaleParamName, $redirectToReferer);
+    }
 }
