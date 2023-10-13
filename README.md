@@ -13,7 +13,7 @@
 
 [//]: # ([![License]&#40;https://poser.pugx.org/leafs/auth/license&#41;]&#40;https://packagist.org/packages/leafs/auth&#41;)
 
-Leaf Omniglot is a simple but powerful module that adds translations functionality to your leaf applications.
+Leaf Omniglot is a simple but powerful module that adds multi language capabilities to your leaf applications.
 
 ## Installation
 
