@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\Constants;
+namespace LeafOmniglot\Constants;
 
 interface ConfigConstants
 {

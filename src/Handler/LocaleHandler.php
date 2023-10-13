@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 
-namespace App\src\Handler;
+namespace LeafOmniglot\Handler;
 
 
-use App\src\Constants\ConfigConstants;
-use App\src\Plugins\Locale\LocaleStrategyPluginInterface;
-use App\src\Reader\ConfigReader;
+use LeafOmniglot\Constants\ConfigConstants;
+use LeafOmniglot\Plugins\Locale\LocaleStrategyPluginInterface;
+use LeafOmniglot\Reader\ConfigReader;
 
 class LocaleHandler
 {
@@ -20,7 +20,7 @@ class LocaleHandler
     private LocaleStrategyPluginInterface $localeStrategyPlugin;
 
     /**
-     * @param \App\src\Plugins\Locale\LocaleStrategyPluginInterface $localeStrategyPlugin
+     * @param \LeafOmniglot\Plugins\Locale\LocaleStrategyPluginInterface $localeStrategyPlugin
      */
     public function __construct(LocaleStrategyPluginInterface $localeStrategyPlugin)
     {

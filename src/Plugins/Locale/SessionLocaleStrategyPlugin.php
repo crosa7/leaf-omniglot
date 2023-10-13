@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace App\src\Plugins\Locale;
+namespace LeafOmniglot\Plugins\Locale;
 
 
 use Leaf\Http\Session;

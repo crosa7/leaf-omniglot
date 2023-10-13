@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 
-namespace App\src\Handler;
+namespace LeafOmniglot\Handler;
 
 
-use App\src\Constants\ConfigConstants;
-use App\src\Exceptions\MissingTranslationFileException;
-use App\src\Reader\ConfigReader;
+use LeafOmniglot\Constants\ConfigConstants;
+use LeafOmniglot\Exceptions\MissingTranslationFileException;
+use LeafOmniglot\Reader\ConfigReader;
 
 class TranslationsHandler
 {
@@ -17,7 +17,7 @@ class TranslationsHandler
     private LocaleHandler $localeHandler;
 
     /**
-     * @param \App\src\Handler\LocaleHandler $localeHandler
+     * @param \LeafOmniglot\Handler\LocaleHandler $localeHandler
      */
     public function __construct(LocaleHandler $localeHandler)
     {

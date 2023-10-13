@@ -17,18 +17,18 @@ if (! function_exists('tl')) {
 if (! function_exists('omniglot')) {
 
     /**
-     * @return \App\src\Omniglot
+     * @return \LeafOmniglot\Omniglot
      */
-    function omniglot(): \App\src\Omniglot
+    function omniglot(): \LeafOmniglot\Omniglot
     {
-        $instance = \App\src\Reader\ConfigReader::config(
-            \App\src\Constants\ConfigConstants::KEY_OMNIGLOT
+        $instance = \LeafOmniglot\Reader\ConfigReader::config(
+            \LeafOmniglot\Constants\ConfigConstants::KEY_OMNIGLOT
         );
 
         if (!$instance) {
-            $instance = new \App\src\Omniglot();
-            \App\src\Reader\ConfigReader::config(
-                \App\src\Constants\ConfigConstants::KEY_OMNIGLOT, $instance
+            $instance = new \LeafOmniglot\Omniglot();
+            \LeafOmniglot\Reader\ConfigReader::config(
+                \LeafOmniglot\Constants\ConfigConstants::KEY_OMNIGLOT, $instance
             );
         }
 

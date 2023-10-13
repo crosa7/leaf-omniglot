@@ -1,9 +1,21 @@
 {
     "name": "crosa7/leaf-omniglot",
     "description": "A Leaf module to add multi language capabilities to leaf applications",
+    "keywords": [
+        "translations",
+        "localization",
+        "multi-language",
+        "i18n",
+        "internationalization",
+        "leaf",
+        "php"
+    ],
     "type": "library",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
-        "leafs/http": "^2.3"
+        "leafs/http": "^2.3",
+        "leafs/session": "^2.0"
     },
     "require-dev": {
         "pestphp/pest": "^2.21"
@@ -11,8 +23,11 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Crosa7\\LeafOmniglot\\": "src/"
-        }
+            "LeafOmniglot\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "authors": [
         {

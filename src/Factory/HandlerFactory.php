@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 
-namespace App\src\Factory;
+namespace LeafOmniglot\Factory;
 
-use App\src\Handler\LocaleHandler;
-use App\src\Handler\RouteHandler;
-use App\src\Handler\TranslationsHandler;
-use App\src\Reader\ConfigReader;
+use LeafOmniglot\Handler\LocaleHandler;
+use LeafOmniglot\Handler\RouteHandler;
+use LeafOmniglot\Handler\TranslationsHandler;
+use LeafOmniglot\Reader\ConfigReader;
 
 class HandlerFactory
 {
     /**
-     * @return \App\src\Handler\TranslationsHandler
+     * @return \LeafOmniglot\Handler\TranslationsHandler
      */
     public function createTranslationsHandler(): TranslationsHandler
     {
@@ -21,7 +21,7 @@ class HandlerFactory
     }
 
     /**
-     * @return \App\src\Handler\LocaleHandler
+     * @return \LeafOmniglot\Handler\LocaleHandler
      */
     public function createLocaleHandler(): LocaleHandler
     {
@@ -29,7 +29,7 @@ class HandlerFactory
     }
 
     /**
-     * @return \App\src\Handler\RouteHandler
+     * @return \LeafOmniglot\Handler\RouteHandler
      */
     public function createRouteHandler(): RouteHandler
     {

@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 
-namespace App\src;
+namespace LeafOmniglot;
 
 
-use App\src\Traits\AbstractFactoryTrait;
+use LeafOmniglot\Traits\AbstractFactoryTrait;
 
 class Core
 {

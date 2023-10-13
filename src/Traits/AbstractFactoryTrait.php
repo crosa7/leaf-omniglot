@@ -1,13 +1,13 @@
 <?php
 
-namespace App\src\Traits;
+namespace LeafOmniglot\Traits;
 
-use App\src\Factory\HandlerFactory;
+use LeafOmniglot\Factory\HandlerFactory;
 
 trait AbstractFactoryTrait
 {
     /**
-     * @return \App\src\Factory\HandlerFactory
+     * @return \LeafOmniglot\Factory\HandlerFactory
      */
     protected function getHandlerFactory(): HandlerFactory
     {
