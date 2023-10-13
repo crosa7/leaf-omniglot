@@ -73,7 +73,7 @@ omniglot()->addLanguageSwitchRoute();
 
 Now in your template file you can add the following:
 
-(this example is using blade as template engine but you can adjust according to your template engine)
+(this example is using **laravel blade** as template engine but you can adjust according to your template engine)
 ```php
 <form method="post" action="/language/switch">
   <select name="locale" onchange="this.form.submit()">
@@ -86,7 +86,43 @@ Now in your template file you can add the following:
 <h1>{{ tl('welcome.title') }}</h1>
 ```
 
-You should then see inside the "h1" tag in your browser the text: Hello World
+Or in a simple index.php file
+
+```php
+<form method="post" action="/language/switch">
+    <select name="locale" onchange="this.form.submit()">
+      <?php
+	foreach(omniglot()->getAvailableLocales() as $locale) {
+            if (omniglot()->getCurrentLocale() === $locale) {
+                echo '<option value=' . $locale .' selected>' . $locale . '</option>';
+            } else {
+                echo '<option value=' . $locale .'>' . $locale . '</option>';
+            }
+	}
+      ?>
+    </select>
+</form>
+
+<h1><?php echo tl('welcome.title') ?></h1>
+```
+
+You should now see in your browser a dropdown with "en_US" as option and inside the "h1" tag the text: Hello World
+
+You can now add another translation file with the same translation key but a different value  
+and see that the dropdown now has a new option and that you can click on it and switch language.
+
+For example:
+
+```php
+// Create the following file inside the "locales" folder
+pt_PT.locale.json
+
+// With the following content
+{
+    "welcome.title": "Ola Mundo"
+}
+```
+Now if you switch to "pt_PT" in the dropdown you should see the text: Ola Mundo
 
 ## Basic Usage
 
