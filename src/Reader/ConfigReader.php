@@ -51,6 +51,8 @@ class ConfigReader
 
             static::$settings[$config] = $value;
         }
+
+        return '';
     }
 
     /**

@@ -1,5 +1,5 @@
 /vendor/
-/src/locales
 .idea
 composer.lock
+.phpunit.result.cache
 

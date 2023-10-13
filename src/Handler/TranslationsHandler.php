@@ -8,11 +8,12 @@ namespace LeafOmniglot\Handler;
 
 use LeafOmniglot\Constants\ConfigConstants;
 use LeafOmniglot\Exceptions\MissingTranslationFileException;
+use LeafOmniglot\Exceptions\TranslationParamNotFoundException;
 use LeafOmniglot\Reader\ConfigReader;
 
 class TranslationsHandler
 {
-    private static array $translationsArrayByLang = [];
+    private static array $translationsArrayByLocale = [];
 
     private LocaleHandler $localeHandler;
 
@@ -36,8 +37,8 @@ class TranslationsHandler
             $currentLocale = $defaultLocale;
         }
 
-        if (!isset(static::$translationsArrayByLang[$currentLocale])) {
-            static::$translationsArrayByLang = [];
+        if (!isset(static::$translationsArrayByLocale[$currentLocale])) {
+            static::$translationsArrayByLocale = [];
             $translationFilesByLocale = $this->localeHandler->getTranslationFilesByLocale();
 
             $folderPath = ConfigReader::config(ConfigConstants::KEY_TRANSLATION_FILES_LOCATION);
@@ -48,7 +49,7 @@ class TranslationsHandler
 
             $jsonTranslations = file_get_contents($folderPath . '/' . $translationFilesByLocale[$currentLocale]);
 
-            static::$translationsArrayByLang[$currentLocale] = json_decode($jsonTranslations, true);
+            static::$translationsArrayByLocale[$currentLocale] = json_decode($jsonTranslations, true);
         }
     }
 
@@ -62,12 +63,12 @@ class TranslationsHandler
     {
         $currentLocale = $this->localeHandler->getCurrentLocale();
 
-        if (isset(static::$translationsArrayByLang[$currentLocale][$key]) && $params) {
-            $translationString = static::$translationsArrayByLang[$currentLocale][$key];
+        if (isset(static::$translationsArrayByLocale[$currentLocale][$key]) && $params) {
+            $translationString = static::$translationsArrayByLocale[$currentLocale][$key];
 
             foreach ($params as $key => $value) {
                 if (!preg_match('/'. $key . '/', $translationString)) {
-                    trigger_error('Param "' . $key . '" not found in translation string "' . $translationString. '"');
+                    throw new TranslationParamNotFoundException($key, $translationString);
                 }
                 $translationString = str_replace($key, $value, $translationString);
             }
@@ -75,6 +76,6 @@ class TranslationsHandler
             return $translationString;
         }
 
-        return static::$translationsArrayByLang[$currentLocale][$key] ?? $key;
+        return static::$translationsArrayByLocale[$currentLocale][$key] ?? $key;
     }
 }

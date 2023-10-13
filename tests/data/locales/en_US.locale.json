@@ -1,0 +1,7 @@
+{
+    "welcome.page.title": "Hello World EN",
+    "test.title": "Its a test EN!",
+    "test.with.param1": "Test %param% EN",
+    "test.with.param2": "Test --param--",
+    "test.with.multiple.params": "Test %param1% and %param2%"
+}

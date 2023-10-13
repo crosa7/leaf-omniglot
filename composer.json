@@ -15,10 +15,12 @@
     "prefer-stable": true,
     "require": {
         "leafs/http": "^2.3",
-        "leafs/session": "^2.0"
+        "leafs/session": "^2.0",
+        "ext-json": "*"
     },
     "require-dev": {
-        "pestphp/pest": "^2.21"
+        "pestphp/pest": "^1.0",
+        "mockery/mockery": "^1.6"
     },
     "license": "MIT",
     "autoload": {

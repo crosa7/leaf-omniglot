@@ -7,6 +7,7 @@ namespace LeafOmniglot\Handler;
 
 
 use LeafOmniglot\Constants\ConfigConstants;
+use LeafOmniglot\Exceptions\MissingTranslationFileException;
 use LeafOmniglot\Plugins\Locale\LocaleStrategyPluginInterface;
 use LeafOmniglot\Reader\ConfigReader;
 
@@ -100,11 +101,7 @@ class LocaleHandler
     private function verifyTranslationFileExistsForLocale(array $translationFilesByLocale, string $locale): void
     {
         if (!isset($translationFilesByLocale[$locale])) {
-            trigger_error(
-                sprintf(
-                    'Translation file for language not found, make sure you have the following file "%s" inside the configured translation files folder',
-                    $locale . self::TRANSLATION_FILE_SUFFIX
-                ));
+            throw new MissingTranslationFileException($locale);
         }
     }
 }
