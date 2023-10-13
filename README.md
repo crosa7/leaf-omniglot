@@ -6,12 +6,9 @@
   <br><br>
 </p>
 
-
-[//]: # ([![Latest Stable Version]&#40;https://poser.pugx.org/leafs/auth/v/stable&#41;]&#40;https://packagist.org/packages/leafs/auth&#41;)
-
-[//]: # ([![Total Downloads]&#40;https://poser.pugx.org/leafs/auth/downloads&#41;]&#40;https://packagist.org/packages/leafs/auth&#41;)
-
-[//]: # ([![License]&#40;https://poser.pugx.org/leafs/auth/license&#41;]&#40;https://packagist.org/packages/leafs/auth&#41;)
+[![Latest Stable Version](http://poser.pugx.org/crosa7/leaf-omniglot/v)](https://packagist.org/packages/crosa7/leaf-omniglot)
+[![Total Downloads](http://poser.pugx.org/crosa7/leaf-omniglot/downloads)](https://packagist.org/packages/crosa7/leaf-omniglot)
+[![License](http://poser.pugx.org/crosa7/leaf-omniglot/license)](https://packagist.org/packages/crosa7/leaf-omniglot)
 
 Leaf Omniglot is a simple but powerful module that adds multi language capabilities to your leaf applications.
 
