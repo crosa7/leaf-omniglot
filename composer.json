@@ -14,12 +14,12 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "leafs/http": "^2.3",
-        "leafs/session": "^2.0",
+        "leafs/http": "^2.3|^3.0|^4.0",
+        "leafs/session": "^2.0|^3.0|^4.0",
         "ext-json": "*"
     },
     "require-dev": {
-        "pestphp/pest": "^1.0",
+        "pestphp/pest": "^1.0|^2.0",
         "mockery/mockery": "^1.6"
     },
     "license": "MIT",
