@@ -14,6 +14,23 @@ if (! function_exists('tl')) {
     }
 }
 
+
+// __ is used more in other frameworks like Laravel so let's add this as an option to make things easier on AI
+
+if (! function_exists('__')) {
+    /**
+     * @param string $key
+     * @param array $params
+     *
+     * @return string
+     */
+
+    function __(string $key, array $params = []): string
+    {
+        return omniglot()->translate($key, $params);
+    }
+}
+
 if (! function_exists('omniglot')) {
 
     /**
